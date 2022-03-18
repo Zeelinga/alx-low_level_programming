@@ -1,41 +1,34 @@
 #include "main.h"
+void print_unsigned_int(unsigned int n);
 /**
- *print_number - print integer.
- *@n: integer.
+ * print_number - print number n with putchar
  *
- *Return: void.
+ * @n: number to print
+ *
+ * Return: always void
  */
 void print_number(int n)
 {
-	unsigned int x;
-
-	x = n;
 	if (n < 0)
 	{
-		_putchar(45);
-		x = -n;
+		_putchar('-');
+		print_unsigned_int(-(unsigned int)n);
 	}
-	if (x / 10)
-		print_number(x / 10);
-	_putchar((x % 10) + '0');
-}#include "main.h"
+	else
+		print_unsigned_int(n);
+}
 /**
- *print_number - print integer.
- *@n: integer.
+ * print_unsigned_int - prints an unsigned integer
  *
- *Return: void.
+ * @n: an unsigned integer to print
+ *
+ * Return: always void
  */
-void print_number(int n)
+void print_unsigned_int(unsigned int n)
 {
-	unsigned int x;
-
-	x = n;
-	if (n < 0)
+	if (n / 10 != 0)
 	{
-		_putchar(45);
-		x = -n;
+		print_unsigned_int(n / 10);
 	}
-	if (x / 10)
-		print_number(x / 10);
-	_putchar((x % 10) + '0');
+	_putchar((n % 10) + '0');
 }
