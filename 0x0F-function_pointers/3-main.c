@@ -1,44 +1,46 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include "3-calc.h"
-
 /**
- * main - Principal
+ * main - main
+ * @argc: arg count
+ * @argv: arg array
  *
- * @ac: count arguments
- * @ag: array
+ * Return: int
  *
- * Return: Always 0
- */
-int main(int arc, char *arg[])
+ **/
+int main(int argc, char **argv)
 {
-	int num1, num2, (*operate)(int, int);
+	int inta, intb;
+	int (*f)(int, int);
 
-	if (arc != 4)
+	if (argc != 4)
 	{
 		printf("Error\n");
-		exit(98);
+		return (98);
 	}
-	if ((*arg[2] != '+' &&
-		*arg[2] != '-' &&
-		*arg[2] != '/' &&
-		*arg[2] != '*' &&
-		*arg[2] != '%')
-		|| arg[2][1] != '\0')
+
+	f = get_op_func(argv[2]);
+
+	if (f == NULL)
+	{
+		printf("Error\n");
+		return (99);
+	}
+
+	if ((argv[2][0] != '+' && argv[2][0] != '-' && argv[2][0] != '/' &&
+	      argv[2][0] != '*' && argv[2][0] != '%') || strlen(argv[2]) != 1)
 	{
 		printf("Error\n");
 		exit(99);
 	}
 
-	num1 = atoi(arg[1]);
-	num2 = atoi(arg[3]);
-	if ((*arg[2] == '/' || *arg[2] == '%') && (num2 == 0))
-	{
-		printf("Error\n");
-		exit(100);
-	}
-	operate = get_op_func(arg[2]);
-	printf("%d\n", operate(num1, num2));
-	return (0);
+		inta = atoi(argv[1]);
+		intb = atoi(argv[3]);
+
+		printf("%d\n", f(inta, intb));
+
+		return (0);
 
 }
